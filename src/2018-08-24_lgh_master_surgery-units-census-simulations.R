@@ -1,7 +1,7 @@
 
 
 #*****************************************************
-# LGH SURGERY CENSUS SIMULATIONS 
+# SURGERY CENSUS SIMULATIONS 
 #*****************************************************
 # 2018-08-23
 # Nayef Ahmad 
@@ -20,7 +20,7 @@ library("magrittr")
 
 # input paramaters: 
 numweeks.param <-  48
-iterations.param <- 100
+iterations.param <- 10
 warmup.cutoff.day.num <- 50
 input.schedule <- "surgery-weekly-schedule.csv"
 
@@ -94,7 +94,7 @@ p1.avg.by.dow <-
 #*********************************************************************
 # write outputs: 
 pdf(here("results", 
-         "output from src", 
+         "dst", 
          as.character(glue("2018-09-13_simulations_schedule-{schedule.num}.pdf"))), 
     width = 10)
 plots.list[1:iterations.param]
@@ -102,12 +102,12 @@ dev.off()
 
 
 ggsave(here("results", 
-            "output from src", 
+            "dst", 
             as.character(glue("2018-09-13_avg-by-day-of-week_schedule-{schedule.num}.pdf"))), 
        p1.avg.by.dow)
 
 
 write_csv(sims.averages.df, 
           here("results",
-               "output from src",
+               "dst",
                as.character(glue("2018-09-13_avg-by-day-of-week_schedule-{schedule.num}.csv"))))
