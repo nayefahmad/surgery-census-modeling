@@ -22,7 +22,7 @@ library("magrittr")
 numweeks.param <-  48
 iterations.param <- 100
 warmup.cutoff.day.num <- 50
-input.schedule <- "2018-09-13_surgery-weekly-schedule-proposed-changes3.csv"
+input.schedule <- "surgery-weekly-schedule.csv"
 
 # ouput label: 
 schedule.num <- 3
