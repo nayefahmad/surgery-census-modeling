@@ -2,4 +2,4 @@
 
 Here's overview of the simulation model: 
 
-!(data/model-overview.jpeg)
+![model diagram](https://raw.githubusercontent.com/nayefahmad/surgery-census-modeling/master/data/model-overview.jpg)
