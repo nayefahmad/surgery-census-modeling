@@ -1,6 +1,7 @@
 # surgery-census-modeling
 
 
+## Background 
 The number of patients in the surgery ward(s) of a hospital at a point in time is referred to as the **surgery census**. Hospital operations managers may need to ensure that the daily surgery census follows specific patterns. As an example, it may be desirable reduce variability in census across days of the week, as this variability can cause very high workloads on certain days.
 
 Two main factors affect the surgery census: 
@@ -9,10 +10,9 @@ Two main factors affect the surgery census:
 
 This project allows users to analyze changes in the weekly pattern of the surgery census, based on changes in the surgical schedule and patients' length of stay distributions in various surgical specialties. 
 
-\  
-\  
-
 Here's overview of the simulation model: 
 
 ![model diagram](https://raw.githubusercontent.com/nayefahmad/surgery-census-modeling/master/data/model-overview-diagram.jpg)
 
+
+## Repo structure
