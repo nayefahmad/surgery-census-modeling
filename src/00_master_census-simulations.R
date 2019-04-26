@@ -13,10 +13,6 @@ library("magrittr")
 
 # rm(list = ls())
 
-# todo: ------------------
-
-
-
 
 # input paramaters: 
 numweeks.param <-  48
@@ -30,13 +26,9 @@ schedule.num <- 3
 
 # load data and functions: 
 source(here("src", 
-            "2018-08-23_lgh_clean-data-for-or-optimization.R"))
+            "01_data-cleaning.R"))
 source(here("src", 
-            "census.in.surgery_function.R"))
-source(here("src", 
-            "simulate.census_function.R"))
-source(here("src", 
-            "simulation.graphs_function.R"))
+            "helper-functions.R"))
 
 
 
