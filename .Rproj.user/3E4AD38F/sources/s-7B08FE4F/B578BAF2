@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1556305235079.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2628325092",
+    "id" : "B578BAF2",
+    "lastKnownWriteTime" : 1556304754,
+    "last_content_update" : 1556304754,
+    "path" : "H:/VCH files - Nayef/surgery-census-modeling/src/00_master_census-simulations.R",
+    "project_path" : "src/00_master_census-simulations.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

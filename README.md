@@ -1,4 +1,4 @@
-# surgery-census-modeling
+# Surgery census modeling
 
 
 ## Background 
@@ -19,5 +19,11 @@ Here's overview of the simulation model:
 * **data**: Three CSV files. Two of them are alternative surgery schedules, specifying, the number of same-day discharge ("SDC") cases and multiple-day LOS ("SDA") cases for each day of the week, and for each surgical specialty. 
 * **src**: To run the simulation, you only need to use the master file, *00_master_census-simulations.R*. The other two files process the data from the input CSVs, and define functions that are used in the master file. 
 * **results/dst**: This is where outputs from the master R file will be saved. 
+
+## Quickstart guide
+1. Open the input schedule CSV file in the **data** folder. The filename is *surgery-weekly-schedule.csv*. 
+2. Vary the number of SDCs and SDAs as necessary to specify the scenario you're interested in. For example, you may want to investigate the effect of reserving one day of the week for SDCs only. 
+3. Run the master file from the **src** folder. 
+4. View results in the **results/dst** folder. 
 
 
