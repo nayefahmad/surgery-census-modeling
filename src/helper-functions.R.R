@@ -189,3 +189,173 @@ census.in.surgery <- function(horizon = 100,
 #       theme_classic(base_size = 14)
 
 
+
+
+
+
+#***************************************************
+# Function to repeat rows of a dataframe a specified number of time 
+#***************************************************
+
+# function defn: 
+repeat.rows <- function(df, 
+                        numreps) { 
+  
+  # input: any df
+  # output: same df, duplicating rows 
+  #     e.g. row number 1, 2, 3, then 1 again, 2 again, 3 again...
+  
+  library("magrittr")
+  
+  numcol <- ncol(df) # %>% print 
+  orig.colnames <- colnames(df)
+  
+  list1 <- list()
+  for (i in 1:numcol) {
+    vec <- df[,i] %>% unname %>% unlist
+    newvec <- rep(vec, numreps)
+    
+    list1[[i]] <- newvec
+  }
+  
+  # combine vectors back into df: 
+  df2 <- do.call(cbind, list1) %>% 
+    as.data.frame() 
+  
+  
+  df2 %<>% mutate(index = rep(1:nrow(df), numreps))
+  
+  colnames(df2) <- c(orig.colnames, "index") 
+  
+  return(df2)
+  
+}
+
+
+# test fn: 
+# repeat.rows(mtcars[1:3, ], 2)
+# 
+# repeat.rows(df1.week.schedule, 2)
+
+
+
+
+
+
+#*************************************************************
+# FUNCTION TO SIMULATE SURGERY UNITS CENSUS X NUMBER OF TIMES 
+#*************************************************************
+
+# function definition: 
+simulate.census <- function(iterations = 2, 
+                            horizon = 600, 
+                            day.number = df4.full.input.schedule$day.number, 
+                            surg.type = as.character(df4.full.input.schedule$surgtype), 
+                            num.patients = df4.full.input.schedule$num.sda) {
+  # input: 
+  #     > number of iterations 
+  #     > other arguments set to defaults, to be passed to census.in.surgery() 
+  
+  # output: 
+  #     > list of vectors, each vector is the result of 1 simulation
+  
+  # check: 
+  if (!exists("census.in.surgery")) {
+    "ERROR: load function census.in.surgery"
+  }
+  
+  
+  # empty list to collect simulations: 
+  census.simulations <- list()
+  for (i in 1:iterations) {
+    surge.census <- mapply(census.in.surgery, 
+                           horizon, 
+                           day.number, 
+                           surg.type, 
+                           num.patients)
+    
+    census.simulations[[i]] <- rowSums(surge.census)
+    
+    
+  }
+  
+  return(census.simulations)
+  
+  
+}
+
+
+# function test: 
+# sims <- simulate.census(iterations = 10)
+# str(sims)
+
+
+
+
+
+#*******************************************************
+# FUNCTION TO GENERATE GRAPHS FROM SIMULATIONS 
+#*******************************************************
+
+sim.graphs <- function(sim.list, 
+                       ymax = 75, 
+                       xmax = 7*numweeks.param + 14) {
+  
+  # input: single vector from a list of lots of simulations produced by 
+  #     fn simulate.census() 
+  #     > this list will prob be named "sims"
+  
+  # output: graphs
+  
+  library("tidyverse")
+  library("ggplot2")
+  
+  plots.list <- list()
+  for (i in 1:length(sim.list)) {
+    total.census.df <- as.data.frame(sim.list[[i]]) %>% 
+      mutate(day = seq(nrow(.)))
+    
+    colnames(total.census.df) <- c("surgery.census", 
+                                   "day.number")
+    
+    plot <- 
+      total.census.df %>% 
+      filter(day.number < xmax) %>% 
+      ggplot(aes(x = day.number, 
+                 y = surgery.census)) + 
+      
+      geom_line(col = "dodgerblue4") +
+      
+      # mark cooldown and warmup periods: 
+      geom_vline(xintercept = 7*numweeks.param, 
+                 col = "firebrick1") + 
+      geom_vline(xintercept = warmup.cutoff.day.num, 
+                 col = "firebrick1") + 
+      
+      scale_y_continuous(limits = c(0, ymax)) + 
+      
+      labs(title = paste0("LGH - Census in surgery units for ",
+                          numweeks.param, 
+                          " weeks of given surgery schedule"), 
+           subtitle = paste0("Generated: ", 
+                             Sys.time(), 
+                             "\nIteration number: ", 
+                             i)) + 
+      theme_classic(base_size = 14)
+    
+    print(plot)
+    
+    plots.list[[i]] <- plot
+    
+  }
+  return(plots.list)
+  
+  
+  
+}
+
+
+#****************************************************************
+# test the function: 
+#****************************************************************
+# sim.graphs(sims[1:10], ymax = 200)
