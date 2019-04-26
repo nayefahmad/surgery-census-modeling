@@ -66,7 +66,7 @@ p1.avg.by.dow <-
       geom_bar(stat = "identity", 
                fill = "dodgerblue3") + 
       scale_y_continuous(limits = c(0,35)) + 
-      labs(title = "LGH - Average census in surgery units by day of week", 
+      labs(title = "Average census in surgery units by day of week", 
            subtitle = paste0("Based on ",
                              iterations.param, 
                              " iterations from given surgery schedule, over ", 
