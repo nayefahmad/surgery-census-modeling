@@ -23,7 +23,8 @@ Here's overview of the simulation model:
 ## Quickstart guide
 1. Open the input schedule CSV file in the **data** folder. The filename is *surgery-weekly-schedule.csv*. 
 2. Vary the number of SDCs and SDAs as necessary to specify the scenario you're interested in. For example, you may want to investigate the effect of reserving one day of the week for SDCs only. 
-3. Run the master file from the **src** folder. 
-4. View results in the **results/dst** folder. 
+3. Launch an RStudio session using the .RProj file in the project root folder. 
+4. In RStudio, run the master file from the **src** folder. Filename: *00_master_census-simulations.R*
+5. View results in the **results/dst** folder. 
 
 
