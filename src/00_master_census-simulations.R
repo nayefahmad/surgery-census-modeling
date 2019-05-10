@@ -21,14 +21,18 @@ warmup.cutoff.day.num <- 50
 input.schedule <- "surgery-weekly-schedule.csv"
 
 # ouput label: 
-schedule.num <- 3
+# If you're trying out several different schedules, you can 
+# change this label to save the results with unique numbers so you 
+# can tell them apart later. 
+schedule.num <- 1
 
 
 # load data and functions: 
 source(here("src", 
-            "01_data-cleaning.R"))
+            "01_helper-functions.R"))
 source(here("src", 
-            "helper-functions.R"))
+            "02_data-cleaning.R"))
+
 
 
 
@@ -74,7 +78,7 @@ p1.avg.by.dow <-
                              " weeks \n", 
                              "Warmup period: ", 
                              warmup.cutoff.day.num -1, 
-                             " days", 
+                             " days \n", 
                              "Schedule number: ", 
                              schedule.num)) + 
       theme_classic(base_size = 14); p1.avg.by.dow
@@ -87,7 +91,7 @@ p1.avg.by.dow <-
 # write outputs: 
 pdf(here("results", 
          "dst", 
-         as.character(glue("2018-09-13_simulations_schedule-{schedule.num}.pdf"))), 
+         as.character(glue("simulations_schedule-{schedule.num}.pdf"))), 
     width = 10)
 plots.list[1:iterations.param]
 dev.off()
@@ -95,11 +99,11 @@ dev.off()
 
 ggsave(here("results", 
             "dst", 
-            as.character(glue("2018-09-13_avg-by-day-of-week_schedule-{schedule.num}.pdf"))), 
+            as.character(glue("avg-by-day-of-week_schedule-{schedule.num}.pdf"))), 
        p1.avg.by.dow)
 
 
 write_csv(sims.averages.df, 
           here("results",
                "dst",
-               as.character(glue("2018-09-13_avg-by-day-of-week_schedule-{schedule.num}.csv"))))
+               as.character(glue("avg-by-day-of-week_schedule-{schedule.num}.csv"))))
